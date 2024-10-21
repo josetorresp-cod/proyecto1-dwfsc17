@@ -14,6 +14,8 @@ Proceso ProyectoSistemaDeCostos
 	Definir IVA Como Real;
 	Definir cantidad Como Real;
 	Definir envio Como Real;
+	Definir precio_con_descuento Como Real;
+	Definir aplicar_descuento Como Logico;
 
 	precio_original<-100;
 	cupon<-0.10;
@@ -38,6 +40,19 @@ Proceso ProyectoSistemaDeCostos
 	//calcular el costo final
 	precio_final<-envio+(cantidad*2);
 	
+	//calcular descuento si aplica cupon
+	si cupon > 0 Entonces
+		aplicar_descuento <- Verdadero;
+	sino
+		aplicar_descuento <- Falso;
+	FinSi
+	
+	si aplicar_descuento Entonces
+		precio_con_descuento<-precio_original-(precio_original*cupon);
+	sino
+		precio_con_descuento<-precio_original;
+	FinSi
+	
 	//Desglose de los costos
 	Escribir 'Precio del producto: $', precio_original;
 	Escribir 'Descuento: $', descuento;
@@ -45,5 +60,7 @@ Proceso ProyectoSistemaDeCostos
 	Escribir 'Descuento por cantidad: $', cantidad;
 	Escribir 'Costo de envío: $', envio;
 	Escribir 'Total: $', precio_final;
+	
+	
 	
 FinProceso
